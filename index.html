@@ -239,6 +239,34 @@
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Learning log entries */
+        .log-entry {
+            transition: border-color 0.35s, background-color 0.35s;
+        }
+        .log-arrow {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+        }
+
+        /* Tool chips */
+        .tool-chip {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, color 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Native details / summary */
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details > summary {
+            cursor: pointer;
+        }
+        summary { list-style: none; }
+        .detail-chevron {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .js details[open] .detail-chevron {
+            transform: rotate(90deg);
+        }
+
         .pulse-dot {
             animation: pulseDot 2.4s ease-in-out infinite;
         }
@@ -280,6 +308,23 @@
             .project-card:hover .project-media img {
                 transform: scale(1.05);
             }
+            .log-link:hover {
+                border-color: #14422d;
+                background-color: rgb(250 249 248 / 0.4);
+            }
+            .log-link:hover .log-arrow {
+                transform: translate(2px, -2px);
+                color: #14422d;
+            }
+            .tool-chip:hover {
+                transform: translateY(-3px);
+                border-color: #14422d;
+                background-color: rgb(20 66 45 / 0.06);
+            }
+            .reading-row:hover {
+                border-color: #14422d33;
+                background-color: rgb(250 249 248 / 0.4);
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -301,13 +346,20 @@
                 transform: none !important;
                 transition: none !important;
             }
+            .detail-chevron {
+                transition: none !important;
+            }
             .project-media,
             .project-media img,
             .chip,
             .step-arrow,
             .contact-row,
             .contact-arrow,
-            .back-top-arrow {
+            .back-top-arrow,
+            .log-entry,
+            .log-arrow,
+            .tool-chip,
+            .reading-row {
                 transition: none !important;
                 transform: none !important;
                 box-shadow: none !important;
@@ -319,15 +371,21 @@
     <a class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] bg-primary text-on-primary px-4 py-2 rounded" href="#main">Skip to content</a>
     <div class="grain" aria-hidden="true"></div>
 
+    <div id="scroll-progress" class="fixed top-0 left-0 right-0 z-[55] h-[3px] pointer-events-none" aria-hidden="true">
+        <div id="scroll-progress-bar" class="h-full w-full bg-primary origin-left" style="transform: scaleX(0)"></div>
+    </div>
+
     <header class="w-full fixed top-0 left-0 z-50">
         <nav class="w-full transition-all duration-300 bg-transparent py-4" aria-label="Primary">
             <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-unit max-w-container-max mx-auto">
-                <a class="hover:opacity-85 transition-opacity duration-300 flex items-center text-primary" href="#top" aria-label="Tejas Saini, home">
+                <a class="hover:opacity-85 transition-opacity duration-300 flex items-center text-primary rounded-2xl" href="#top" aria-label="Tejas Saini, home" title="Tejas Saini">
                     <svg class="h-8 md:h-10 w-auto" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <g stroke="currentColor" stroke-width="9" stroke-linecap="butt" stroke-linejoin="miter">
-                            <path d="M10 16 H32" />
-                            <path d="M21 16 V50" />
-                            <path d="M62 16 H44 V33 H58 V50 H44" />
+                        <title>TS</title>
+                        <rect x="3" y="3" width="66" height="66" rx="18" fill="#14422d" />
+                        <g stroke="#faf9f8" stroke-width="8.5" stroke-linecap="butt" stroke-linejoin="miter">
+                            <path d="M12 23 H60" />
+                            <path d="M32 23 V49" />
+                            <path d="M44 23 V35 H58 V49 H46" />
                         </g>
                     </svg>
                 </a>
@@ -390,6 +448,14 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="hero-item flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-outline-variant pt-5 mt-16" style="animation-delay: 1960ms">
+                    <span class="pulse-dot flex-shrink-0 w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>
+                    <p class="font-mono-ui text-mono-ui uppercase tracking-widest text-secondary">Currently Building</p>
+                    <span class="text-secondary/70" aria-hidden="true">—</span>
+                    <p class="font-body-md text-body-md font-medium text-primary">ML + AI projects</p>
+                    <!-- Update the "Currently Building" text above (and the label, if needed). -->
+                </div>
             </div>
         </div>
 
@@ -434,9 +500,34 @@
                         Python · Pandas · Scikit-learn · FastAPI
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a class="bg-primary text-on-primary px-8 py-3 rounded hover:bg-primary-container hover:text-on-primary-container transition-colors font-mono-ui text-mono-ui uppercase tracking-wider text-center" href="https://autovalue.tejassainids.com" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                        <a class="border border-on-surface text-on-surface px-6 py-3 rounded hover:bg-surface-container-low transition-colors font-mono-ui text-mono-ui uppercase tracking-wider" href="https://github.com/tejassainids/AutoValue" target="_blank" rel="noopener noreferrer" aria-label="AutoValue GitHub repository">&lt;Code&gt;</a>
+                        <a class="project-cta bg-primary text-on-primary px-8 py-3 rounded hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg shadow-sm font-mono-ui text-mono-ui uppercase tracking-wider text-center" href="https://autovalue.tejassainids.com" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                        <a class="project-cta border border-on-surface text-on-surface px-6 py-3 rounded hover:bg-surface-container-low hover:-translate-y-0.5 transition-all duration-300 font-mono-ui text-mono-ui uppercase tracking-wider" href="https://github.com/tejassainids/AutoValue" target="_blank" rel="noopener noreferrer" aria-label="AutoValue GitHub repository">&lt;Code&gt;</a>
                     </div>
+
+                    <details class="group mt-10">
+                        <summary class="inline-flex items-center gap-2.5 font-mono-ui text-mono-ui text-primary uppercase tracking-widest border-b border-outline-variant/60 pb-1.5 hover:border-primary transition-colors">
+                            <svg class="detail-chevron w-4 h-4 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6" /></svg>
+                            Project Details
+                        </summary>
+                        <div class="mt-5 border-t border-outline-variant/60 pt-5 flex flex-col gap-4">
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Problem</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">It's hard for a buyer to tell whether a used-car resale price is fair. AutoValue predicts a fair resale price from the vehicle's characteristics.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Data</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">A dataset of used vehicles with their recorded attributes, cleaned and prepared into model-ready features.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Approach</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">A regression pipeline built around preprocessing, feature selection, and model evaluation &mdash; then picking the model that performed best on held-out data.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Deployment</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">The model is served through a FastAPI API and reachable from the browser via the live demo.</p>
+                            </div>
+                        </div>
+                    </details>
                 </div>
             </article>
         </section>
@@ -487,6 +578,95 @@
             </div>
         </section>
 
+        <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface-container-lowest border-t border-outline-variant" id="learning-log" aria-labelledby="learning-log-heading">
+            <div class="section-glow" aria-hidden="true"></div>
+            <div class="max-w-3xl" data-reveal="left">
+                <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">03 — Learning Log</p>
+                <h2 id="learning-log-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-3">Learning Log</h2>
+                <p class="font-body-md text-body-md text-secondary">A working notebook &mdash; what I build, and what each build was an exercise in.</p>
+            </div>
+            <ol class="max-w-3xl flex flex-col mt-10">
+                <li data-reveal="up" data-reveal-delay="0">
+                    <a href="https://github.com/tejassainids/AutoValue" target="_blank" rel="noopener noreferrer" class="log-entry log-link group flex items-start justify-between gap-4 border-t border-outline-variant/70 py-6">
+                        <span>
+                            <span class="flex items-baseline gap-x-3 flex-wrap">
+                                <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">01</span>
+                                <span class="font-headline-lg-mobile text-[20px] font-semibold text-primary group-hover:text-primary">AutoValue</span>
+                            </span>
+                            <span class="block font-body-md text-body-md text-secondary mt-1.5">Indian car resale prediction</span>
+                            <span class="block font-mono-ui text-mono-ui text-on-surface-variant mt-3">&rarr; preprocessing, feature selection, evaluation, deployment</span>
+                        </span>
+                        <svg class="log-arrow w-4 h-4 text-secondary flex-shrink-0 mt-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                    </a>
+                </li>
+                <li data-reveal="up" data-reveal-delay="80">
+                    <div class="log-entry group flex items-start justify-between gap-4 border-t border-outline-variant/70 py-6">
+                        <span>
+                            <span class="flex items-baseline gap-x-3 flex-wrap">
+                                <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">02</span>
+                                <span class="font-headline-lg-mobile text-[20px] font-semibold text-on-surface">CrowdSafe</span>
+                            </span>
+                            <span class="block font-body-md text-body-md text-secondary mt-1.5">Crowd safety and risk simulation</span>
+                            <span class="block font-mono-ui text-mono-ui text-on-surface-variant mt-3">&rarr; sensor fusion, risk analysis, intervention logic</span>
+                        </span>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant" id="tools" aria-labelledby="tools-heading">
+            <div class="section-glow" aria-hidden="true"></div>
+            <div class="max-w-3xl" data-reveal="left">
+                <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">04 — Toolbox</p>
+                <h2 id="tools-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-3">Tools I Work With</h2>
+                <p class="font-body-md text-body-md text-secondary">The everyday toolkit behind the projects above.</p>
+            </div>
+            <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-4xl mt-10">
+                <li data-reveal="up" data-reveal-delay="0"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>Python</span></li>
+                <li data-reveal="up" data-reveal-delay="60"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>NumPy</span></li>
+                <li data-reveal="up" data-reveal-delay="120"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>Pandas</span></li>
+                <li data-reveal="up" data-reveal-delay="180"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>Matplotlib</span></li>
+                <li data-reveal="up" data-reveal-delay="240"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>Scikit-learn</span></li>
+                <li data-reveal="up" data-reveal-delay="300"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>OpenCV</span></li>
+                <li data-reveal="up" data-reveal-delay="360"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>MediaPipe</span></li>
+                <li data-reveal="up" data-reveal-delay="420"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>FastAPI</span></li>
+                <li data-reveal="up" data-reveal-delay="480"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>Git</span></li>
+                <li data-reveal="up" data-reveal-delay="540"><span class="tool-chip block border border-outline-variant/60 rounded-lg px-4 py-3.5 font-mono-ui text-mono-ui text-on-surface-variant font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 mr-2.5" aria-hidden="true"></span>GitHub</span></li>
+            </ul>
+        </section>
+
+        <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface-container-lowest border-t border-outline-variant" id="reading" aria-labelledby="reading-heading">
+            <div class="section-glow" aria-hidden="true"></div>
+            <div class="max-w-3xl" data-reveal="left">
+                <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">05 — Reading</p>
+                <h2 id="reading-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-3">Reading &amp; References</h2>
+                <p class="font-body-md text-body-md text-secondary">Selected references I return to while building.</p>
+            </div>
+            <ul class="max-w-3xl flex flex-col mt-10">
+                <li data-reveal="up" data-reveal-delay="0">
+                    <div class="reading-row flex items-baseline gap-x-4 gap-y-1 flex-wrap border-t border-outline-variant/70 py-5">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px] w-8 flex-shrink-0">01</span>
+                        <span class="font-body-md text-body-md text-on-surface font-semibold">Hands-On Machine Learning with Scikit-Learn, Keras &amp; TensorFlow</span>
+                        <span class="font-mono-ui text-mono-ui text-secondary text-mono-ui">&mdash; Aur&eacute;lien G&eacute;ron <span class="text-primary/70">[ ML ]</span></span>
+                    </div>
+                </li>
+                <li data-reveal="up" data-reveal-delay="80">
+                    <div class="reading-row flex items-baseline gap-x-4 gap-y-1 flex-wrap border-t border-outline-variant/70 py-5">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px] w-8 flex-shrink-0">02</span>
+                        <span class="font-body-md text-body-md text-on-surface font-semibold">Practical Statistics for Data Scientists</span>
+                        <span class="font-mono-ui text-mono-ui text-secondary"><span class="text-primary/70">[ Stats ]</span></span>
+                    </div>
+                </li>
+                <li data-reveal="up" data-reveal-delay="160">
+                    <div class="reading-row flex items-baseline gap-x-4 gap-y-1 flex-wrap border-t border-outline-variant/70 py-5">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px] w-8 flex-shrink-0">03</span>
+                        <span class="font-body-md text-body-md text-on-surface font-semibold">Practical Mathematics for Data Science</span>
+                        <span class="font-mono-ui text-mono-ui text-secondary"><span class="text-primary/70">[ Math ]</span></span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
         <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant" id="contact" aria-labelledby="contact-heading">
             <div class="section-glow" aria-hidden="true"></div>
             <div class="max-w-2xl">
@@ -511,28 +691,38 @@
                         </a>
                     </li>
                     <li data-reveal="up" data-reveal-delay="240">
-                        <a href="mailto:tejassainids@gmail.com" class="contact-row group flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary">
-                            <span class="flex items-baseline gap-x-3 flex-wrap">
-                                <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">Email</span>
-                                <span class="font-mono-ui text-mono-ui text-secondary group-hover:text-on-surface-variant transition-colors duration-300">tejassainids@gmail.com</span>
-                            </span>
-                            <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
-                        </a>
+                        <div class="contact-row group rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary">
+                            <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+                                <a href="mailto:tejassainids@gmail.com" class="inline-flex items-baseline gap-x-3 flex-wrap">
+                                    <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">Email</span>
+                                    <span class="font-mono-ui text-mono-ui text-secondary group-hover:text-on-surface-variant transition-colors duration-300">tejassainids@gmail.com</span>
+                                </a>
+                                <button id="copy-email" type="button" class="inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2 font-mono-ui text-mono-ui text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300 hover:-translate-y-0.5" aria-label="Copy email address">
+                                    <svg id="copy-email-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                        <rect x="9" y="9" width="11" height="11" rx="1.5" /><path stroke-linecap="round" d="M5 15V5a2 2 0 0 1 2-2h10" stroke-linejoin="round" />
+                                    </svg>
+                                    <span id="copy-email-label">Copy</span>
+                                </button>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
         </section>
     </main>
 
-    <footer class="bg-surface-container-low w-full border-t border-outline-variant">
+    <footer class="bg-surface-container-low w-full border-t border-outline-variant relative overflow-hidden">
+        <div class="section-glow" aria-hidden="true"></div>
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
             <div class="flex flex-col md:flex-row justify-between gap-10">
-                <a href="#top" class="inline-flex items-center gap-3 w-fit text-primary hover:opacity-85 transition-opacity duration-300 rounded" aria-label="Tejas Saini, back to top">
-                    <svg class="h-9 w-9" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <g stroke="currentColor" stroke-width="9" stroke-linecap="butt" stroke-linejoin="miter">
-                            <path d="M10 16 H32" />
-                            <path d="M21 16 V50" />
-                            <path d="M62 16 H44 V33 H58 V50 H44" />
+                <a href="#top" class="inline-flex items-center gap-3 w-fit text-primary hover:opacity-85 transition-opacity duration-300 rounded-2xl" aria-label="Tejas Saini, back to top" title="Tejas Saini">
+                    <svg class="h-9 w-9 flex-shrink-0" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <title>TS</title>
+                        <rect x="3" y="3" width="66" height="66" rx="18" fill="#14422d" />
+                        <g stroke="#faf9f8" stroke-width="8.5" stroke-linecap="butt" stroke-linejoin="miter">
+                            <path d="M12 23 H60" />
+                            <path d="M32 23 V49" />
+                            <path d="M44 23 V35 H58 V49 H46" />
                         </g>
                     </svg>
                     <span class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Tejas Saini</span>
@@ -640,6 +830,50 @@ void main() {
                 nav.classList.add('bg-transparent', 'py-4');
             }
         }, { passive: true });
+
+        const progressBar = document.getElementById('scroll-progress-bar');
+        if (progressBar) {
+            const updateProgress = () => {
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+                progressBar.style.transform = 'scaleX(' + p + ')';
+            };
+            let progressTicking = false;
+            const onProgressScroll = () => {
+                if (progressTicking) return;
+                progressTicking = true;
+                requestAnimationFrame(() => {
+                    updateProgress();
+                    progressTicking = false;
+                });
+            };
+            window.addEventListener('scroll', onProgressScroll, { passive: true });
+            window.addEventListener('resize', onProgressScroll, { passive: true });
+            updateProgress();
+        }
+
+        const copyBtn = document.getElementById('copy-email');
+        if (copyBtn && navigator.clipboard) {
+            const copyIcon = document.getElementById('copy-email-icon');
+            const copyLabel = document.getElementById('copy-email-label');
+            const originalIcon = copyIcon.innerHTML;
+            const originalLabel = copyLabel.textContent;
+            const email = (copyBtn.closest('li').querySelector('a[href^="mailto:"]').getAttribute('href') || '').replace('mailto:', '');
+            let copyTimer;
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(email).then(() => {
+                    copyIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5" />';
+                    copyLabel.textContent = 'Copied';
+                    copyBtn.setAttribute('aria-label', 'Email address copied');
+                    clearTimeout(copyTimer);
+                    copyTimer = setTimeout(() => {
+                        copyIcon.innerHTML = originalIcon;
+                        copyLabel.textContent = originalLabel;
+                        copyBtn.setAttribute('aria-label', 'Copy email address');
+                    }, 1800);
+                }).catch(() => {});
+            });
+        }
 
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const closeMenuBtn = document.getElementById('close-menu-btn');
