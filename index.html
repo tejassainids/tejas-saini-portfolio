@@ -661,28 +661,24 @@
                 <h2 id="contact-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-10" data-reveal="up">Contact</h2>
                 <ul class="flex flex-col gap-4">
                     <li data-reveal="up" data-reveal-delay="80">
-                        <div class="contact-row flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60">
-                            <span class="flex items-baseline gap-x-3 flex-wrap">
-                                <span class="font-body-md text-on-surface font-medium">LinkedIn</span>
-                                <span class="font-mono-ui text-mono-ui text-secondary">in/tejas-saini-a981a3211</span>
-                            </span>
-                        </div>
+                        <a href="https://www.linkedin.com/in/tejas-saini-a981a3211/" target="_blank" rel="noopener noreferrer" class="contact-row group flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary" title="Open LinkedIn profile">
+                            <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">LinkedIn</span>
+                            <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                        </a>
                     </li>
                     <li data-reveal="up" data-reveal-delay="160">
-                        <div class="contact-row flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60">
-                            <span class="flex items-baseline gap-x-3 flex-wrap">
-                                <span class="font-body-md text-on-surface font-medium">GitHub</span>
-                                <span class="font-mono-ui text-mono-ui text-secondary">tejassainids</span>
-                            </span>
-                        </div>
+                        <a href="https://github.com/tejassainids" target="_blank" rel="noopener noreferrer" class="contact-row group flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary" title="Open GitHub profile">
+                            <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">GitHub</span>
+                            <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                        </a>
                     </li>
                     <li data-reveal="up" data-reveal-delay="240">
-                        <div class="contact-row rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60">
+                        <div class="contact-row group rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary">
                             <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-                                <span class="inline-flex items-baseline gap-x-3 flex-wrap">
-                                    <span class="font-body-md text-on-surface font-medium">Email</span>
-                                    <span class="font-mono-ui text-mono-ui text-secondary" id="contact-email-text">tejassainids@gmail.com</span>
-                                </span>
+                                <a href="mailto:tejassainids@gmail.com" class="inline-flex items-baseline gap-2 font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300" title="Open email client">
+                                    Email
+                                    <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                                </a>
                                 <button id="copy-email" type="button" class="inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2 font-mono-ui text-mono-ui text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300 hover:-translate-y-0.5" aria-label="Copy email address">
                                     <svg id="copy-email-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                         <rect x="9" y="9" width="11" height="11" rx="1.5" /><path stroke-linecap="round" d="M5 15V5a2 2 0 0 1 2-2h10" stroke-linejoin="round" />
@@ -844,8 +840,8 @@ void main() {
             const copyLabel = document.getElementById('copy-email-label');
             const originalIcon = copyIcon.innerHTML;
             const originalLabel = copyLabel.textContent;
-            const emailText = document.getElementById('contact-email-text');
-            const email = emailText ? emailText.textContent.trim() : '';
+            const mailLink = copyBtn.closest('li').querySelector('a[href^="mailto:"]');
+            const email = mailLink ? (mailLink.getAttribute('href') || '').replace('mailto:', '') : '';
             let copyTimer;
             copyBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(email).then(() => {
