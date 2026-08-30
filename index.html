@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tejas Saini — Portfolio</title>
     <meta name="description" content="Portfolio of Tejas Saini — data science, machine learning, and AI.">
+    <meta name="theme-color" content="#faf9f8">
     <link rel="icon" type="image/svg+xml" href="assets/ts-mark.svg">
     <link rel="icon" type="image/png" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -105,8 +106,61 @@
             transform-origin: bottom left;
         }
 
+        /* Film grain */
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.028;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* Hero welcome sequence */
+        .hero-intro {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            opacity: 0;
+            pointer-events: none;
+            animation: heroIntro 2.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes heroIntro {
+            0% { opacity: 0; transform: translateY(10px); }
+            12% { opacity: 1; transform: translateY(0); }
+            55% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; visibility: hidden; }
+        }
+        .hero-intro-rule {
+            height: 2px;
+            width: 96px;
+            margin-top: 18px;
+            background: #14422d;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: ruleGrow 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+        @keyframes ruleGrow {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        .hero-fade {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 140px;
+            background: linear-gradient(to bottom, transparent, #faf9f8);
+            pointer-events: none;
+        }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(22px); }
+            from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .hero-item {
@@ -114,26 +168,112 @@
             animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .js .reveal {
+        .hero-scroll-line {
+            position: relative;
+            width: 1px;
+            height: 44px;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #717973, transparent);
+        }
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -50%;
+            width: 100%;
+            height: 60%;
+            background: #14422d;
+            animation: scrollLine 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes scrollLine {
+            0% { top: -50%; }
+            100% { top: 115%; }
+        }
+
+        /* Reveal on scroll */
+        .js [data-reveal] {
             opacity: 0;
-            transform: translateY(26px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .js .reveal.active {
+        .js [data-reveal="left"] { transform: translateX(32px); }
+        .js [data-reveal="right"] { transform: translateX(-32px); }
+        .js [data-reveal="up"] { transform: translateY(28px); }
+        .js [data-reveal="fade"] { transform: none; }
+        .js [data-reveal].active {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
         }
 
         .js .project-media {
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .project-media img {
             transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
         }
 
+        .section-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 220px;
+            pointer-events: none;
+            background: radial-gradient(620px 220px at 18% 0%, rgb(20 66 45 / 0.05), transparent 70%);
+        }
+
+        /* Micro-interactions */
+        .chip {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, color 0.3s, background-color 0.3s;
+        }
+        .step-arrow {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .contact-row {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s, background-color 0.35s;
+        }
+        .contact-arrow {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+        }
+        .back-top-arrow {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pulse-dot {
+            animation: pulseDot 2.4s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+
         @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-            .project-card:hover .project-media {
+            .chip:hover {
+                transform: translateY(-3px);
+                border-color: #14422d;
+                color: #14422d;
+                background-color: rgb(20 66 45 / 0.06);
+            }
+            .step:hover {
+                border-color: #14422d;
+                color: #14422d;
+            }
+            .step:hover .step-arrow {
+                transform: translateX(3px);
+            }
+            .contact-row:hover {
+                transform: translateY(-3px);
+                border-color: #14422d;
+                box-shadow: 0 18px 40px -24px rgb(20 66 45 / 0.35);
+                background-color: rgb(250 249 248 / 0.9);
+            }
+            .contact-row:hover .contact-arrow {
+                transform: translateX(4px);
+            }
+            .back-top:hover .back-top-arrow {
+                transform: translateY(-3px);
+            }
+            .js .project-card:hover .project-media {
                 transform: translateY(-6px);
                 box-shadow: 0 30px 60px -30px rgb(20 66 45 / 0.3);
             }
@@ -148,14 +288,26 @@
                 animation: none !important;
                 opacity: 1 !important;
             }
-            .js .reveal {
+            .hero-intro,
+            .hero-intro-rule {
+                display: none !important;
+            }
+            .pulse-dot,
+            .hero-scroll-line::after {
                 animation: none !important;
-                opacity: 1;
-                transform: none;
-                transition: none;
+            }
+            .js [data-reveal] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
             }
             .project-media,
-            .project-media img {
+            .project-media img,
+            .chip,
+            .step-arrow,
+            .contact-row,
+            .contact-arrow,
+            .back-top-arrow {
                 transition: none !important;
                 transform: none !important;
                 box-shadow: none !important;
@@ -165,6 +317,7 @@
 </head>
 <body class="bg-surface-bright text-on-surface font-body-md overflow-x-hidden antialiased selection:bg-primary-container selection:text-on-primary-container">
     <a class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] bg-primary text-on-primary px-4 py-2 rounded" href="#main">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
 
     <header class="w-full fixed top-0 left-0 z-50">
         <nav class="w-full transition-all duration-300 bg-transparent py-4" aria-label="Primary">
@@ -209,22 +362,27 @@
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-25 mix-blend-multiply" aria-hidden="true">
             <canvas id="shader-canvas" class="w-full h-full block"></canvas>
         </div>
+        <div class="hero-fade" aria-hidden="true"></div>
 
         <div class="grid grid-cols-4 md:grid-cols-12 gap-gutter w-full relative z-10">
-            <div class="col-span-4 md:col-span-10 md:col-start-2">
-                <h1 class="hero-item font-display-lg text-[clamp(2.75rem,8vw,7.5rem)] leading-[0.95] md:font-display-xl text-primary mb-6 tracking-tighter" style="animation-delay: 0ms">
+            <div class="col-span-4 md:col-span-10 md:col-start-2 relative">
+                <div class="hero-intro" aria-hidden="true">
+                    <p class="font-display-lg text-[clamp(2.25rem,6vw,5.25rem)] leading-[0.95] text-primary tracking-tighter">Hi, I'm Tejas.</p>
+                    <div class="hero-intro-rule"></div>
+                </div>
+                <h1 class="hero-item font-display-lg text-[clamp(2.75rem,8vw,7.5rem)] leading-[0.95] md:font-display-xl text-primary mb-6 tracking-tighter" style="animation-delay: 1350ms">
                     Tejas Saini
                 </h1>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mt-12">
-                    <div class="hero-item md:col-span-4 border-t border-outline-variant pt-4" style="animation-delay: 120ms">
+                    <div class="hero-item md:col-span-4 border-t border-outline-variant pt-4" style="animation-delay: 1500ms">
                         <h2 class="font-mono-ui text-mono-ui text-secondary mb-2 uppercase tracking-wider">Focus Areas</h2>
                         <p class="font-body-md text-body-md text-on-surface-variant font-medium">Data Science · Machine Learning · AI</p>
                     </div>
                     <div class="md:col-span-7 md:col-start-6">
-                        <p class="hero-item font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-6 leading-tight" style="animation-delay: 240ms">
+                        <p class="hero-item font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-6 leading-tight" style="animation-delay: 1680ms">
                             “I build things to understand them.”
                         </p>
-                        <a class="hero-item inline-flex items-center gap-2 font-mono-ui text-mono-ui text-primary uppercase tracking-widest border-b-2 border-primary pb-1.5 hover:opacity-75 hover:gap-3 transition-all duration-300" style="animation-delay: 360ms" href="#work">
+                        <a class="hero-item inline-flex items-center gap-2 font-mono-ui text-mono-ui text-primary uppercase tracking-widest border-b-2 border-primary pb-1.5 hover:opacity-75 hover:gap-3 transition-all duration-300" style="animation-delay: 1840ms" href="#work">
                             Explore my work
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" d="M12 5v14M6 13l6 6 6-6" />
@@ -234,23 +392,38 @@
                 </div>
             </div>
         </div>
+
+        <div class="absolute bottom-10 inset-x-0 flex justify-center pointer-events-none" aria-hidden="true">
+            <div class="hero-item flex flex-col items-center gap-2.5 text-secondary" style="animation-delay: 1900ms">
+                <span class="font-mono-ui text-mono-ui text-[11px] uppercase tracking-widest">Scroll</span>
+                <span class="hero-scroll-line"></span>
+            </div>
+        </div>
     </div>
 
     <main id="main">
-        <section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant" id="work" aria-labelledby="work-heading">
-            <div class="grid grid-cols-4 md:grid-cols-12 gap-gutter mb-12 reveal">
+        <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant" id="work" aria-labelledby="work-heading">
+            <div class="section-glow" aria-hidden="true"></div>
+            <div class="grid grid-cols-4 md:grid-cols-12 gap-gutter mb-12" data-reveal="left">
                 <div class="col-span-4 md:col-span-8">
-                    <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">Portfolio</p>
+                    <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">01 — Portfolio</p>
                     <h2 id="work-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Featured Work</h2>
                 </div>
             </div>
 
-            <article class="project-card group grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-                <div class="reveal lg:col-span-7 project-media relative rounded-2xl overflow-hidden bg-surface-container-low border border-outline-variant/50">
-                    <img src="assets/autovalue_demo.png" alt="AutoValue — Indian Car Resale Price Predictor interface preview" width="2820" height="1662" loading="lazy" class="w-full h-auto block">
+            <article class="project-card group relative grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+                <span class="hidden lg:block absolute -top-16 left-0 font-display-lg text-[160px] leading-none text-primary/5 tracking-tighter select-none pointer-events-none" aria-hidden="true">01</span>
+
+                <div class="lg:col-span-7 project-media relative rounded-2xl overflow-hidden bg-surface-container-low border border-outline-variant/50" data-reveal="up">
+                    <img src="assets/autovalue_demo.png" alt="AutoValue — Indian Car Resale Price Predictor interface preview" width="2820" height="1662" loading="lazy" data-parallax="10" class="w-full h-auto block">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+                    <a href="https://autovalue.tejassainids.com" target="_blank" rel="noopener noreferrer" class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-primary/90 backdrop-blur-sm text-on-primary font-mono-ui text-mono-ui px-3 py-1.5 hover:bg-primary transition-colors" aria-label="Open AutoValue live demo">
+                        <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-[#9fcfb2]" aria-hidden="true"></span>
+                        Live
+                    </a>
                 </div>
 
-                <div class="reveal lg:col-span-5 flex flex-col justify-center mt-8 lg:mt-0 lg:pl-6" data-reveal-delay="120">
+                <div class="lg:col-span-5 flex flex-col justify-center mt-8 lg:mt-0 lg:pl-6" data-reveal="right" data-reveal-delay="120">
                     <h3 class="font-headline-lg-mobile text-[28px] md:text-[36px] md:leading-tight text-primary mb-5 leading-tight">
                         AutoValue — Indian Car Resale Price Predictor
                     </h3>
@@ -268,46 +441,83 @@
             </article>
         </section>
 
-        <section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface-container-lowest border-t border-outline-variant" id="about" aria-labelledby="about-heading">
-            <div class="max-w-3xl reveal">
-                <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">About</p>
+        <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface-container-lowest border-t border-outline-variant" id="about" aria-labelledby="about-heading">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                <div class="absolute -right-24 top-24 w-80 h-80 bg-[radial-gradient(circle,#14422d0d_1px,transparent_1.5px)] [background-size:14px_14px]" data-parallax="14"></div>
+            </div>
+
+            <div class="max-w-3xl" data-reveal="up">
+                <p class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-2">02 — About</p>
                 <h2 id="about-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-6 leading-tight">
                     I'm currently exploring how data, models, and intelligent systems come together.
                 </h2>
                 <h3 class="font-mono-ui text-mono-ui text-primary uppercase tracking-wider mb-4">Interests</h3>
                 <ul class="flex flex-wrap gap-2.5 mb-12">
-                    <li class="border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">Data Science</li>
-                    <li class="border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">Machine Learning</li>
-                    <li class="border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">Deep Learning</li>
-                    <li class="border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">LLMs / GenAI</li>
-                    <li class="border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">AI Engineering</li>
+                    <li data-reveal="fade" data-reveal-delay="0"><span class="chip inline-block border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">Data Science</span></li>
+                    <li data-reveal="fade" data-reveal-delay="60"><span class="chip inline-block border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">Machine Learning</span></li>
+                    <li data-reveal="fade" data-reveal-delay="120"><span class="chip inline-block border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">Deep Learning</span></li>
+                    <li data-reveal="fade" data-reveal-delay="180"><span class="chip inline-block border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">LLMs / GenAI</span></li>
+                    <li data-reveal="fade" data-reveal-delay="240"><span class="chip inline-block border border-outline-variant/60 px-4 py-2 rounded-full font-body-md text-on-surface-variant font-medium">AI Engineering</span></li>
                 </ul>
             </div>
 
-            <div class="pt-10 border-t border-outline-variant/60 reveal">
-                <h3 class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-6">Learning Philosophy</h3>
-                <p class="font-headline-lg-mobile text-[22px] sm:text-[26px] text-primary leading-relaxed">
-                    Learn <span class="text-secondary" aria-hidden="true">→</span>
-                    Build <span class="text-secondary" aria-hidden="true">→</span>
-                    Test <span class="text-secondary" aria-hidden="true">→</span>
-                    Document <span class="text-secondary" aria-hidden="true">→</span>
-                    Repeat
-                </p>
+            <div class="pt-10 border-t border-outline-variant/60">
+                <h3 class="font-mono-ui text-mono-ui text-secondary uppercase tracking-widest mb-6" data-reveal="left">Learning Philosophy</h3>
+                <ol class="flex flex-wrap gap-3">
+                    <li class="step inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2.5 font-headline-lg-mobile text-[17px] text-primary" data-reveal="up" data-reveal-delay="0">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">01</span> Learn
+                        <svg class="step-arrow w-4 h-4 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </li>
+                    <li class="step inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2.5 font-headline-lg-mobile text-[17px] text-primary" data-reveal="up" data-reveal-delay="80">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">02</span> Build
+                        <svg class="step-arrow w-4 h-4 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </li>
+                    <li class="step inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2.5 font-headline-lg-mobile text-[17px] text-primary" data-reveal="up" data-reveal-delay="160">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">03</span> Test
+                        <svg class="step-arrow w-4 h-4 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </li>
+                    <li class="step inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2.5 font-headline-lg-mobile text-[17px] text-primary" data-reveal="up" data-reveal-delay="240">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">04</span> Document
+                        <svg class="step-arrow w-4 h-4 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </li>
+                    <li class="step inline-flex items-center gap-2 rounded-full border border-outline-variant/60 px-4 py-2.5 font-headline-lg-mobile text-[17px] text-primary" data-reveal="up" data-reveal-delay="320">
+                        <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">05</span> Repeat
+                    </li>
+                </ol>
             </div>
         </section>
 
-        <section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant" id="contact" aria-labelledby="contact-heading">
-            <div class="max-w-2xl reveal">
-                <h2 id="contact-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-6">Contact</h2>
-                <ul class="flex flex-col gap-y-3">
-                    <li>
-                        <a class="inline-flex items-baseline gap-3 text-on-surface hover:text-primary transition-colors font-medium" href="https://www.linkedin.com/in/tejas-saini-a981a3211/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <section class="relative py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant" id="contact" aria-labelledby="contact-heading">
+            <div class="section-glow" aria-hidden="true"></div>
+            <div class="max-w-2xl">
+                <h2 id="contact-heading" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-10" data-reveal="up">Contact</h2>
+                <ul class="flex flex-col gap-4">
+                    <li data-reveal="up" data-reveal-delay="80">
+                        <a href="https://www.linkedin.com/in/tejas-saini-a981a3211/" target="_blank" rel="noopener noreferrer" class="contact-row group flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary">
+                            <span class="flex items-baseline gap-x-3 flex-wrap">
+                                <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">LinkedIn</span>
+                                <span class="font-mono-ui text-mono-ui text-secondary group-hover:text-on-surface-variant transition-colors duration-300">in/tejas-saini-a981a3211</span>
+                            </span>
+                            <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                        </a>
                     </li>
-                    <li>
-                        <a class="inline-flex items-baseline gap-3 text-on-surface hover:text-primary transition-colors font-medium" href="https://github.com/tejassainids" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <li data-reveal="up" data-reveal-delay="160">
+                        <a href="https://github.com/tejassainids" target="_blank" rel="noopener noreferrer" class="contact-row group flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary">
+                            <span class="flex items-baseline gap-x-3 flex-wrap">
+                                <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">GitHub</span>
+                                <span class="font-mono-ui text-mono-ui text-secondary group-hover:text-on-surface-variant transition-colors duration-300">tejassainids</span>
+                            </span>
+                            <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                        </a>
                     </li>
-                    <li>
-                        <a class="inline-flex items-baseline gap-3 text-on-surface hover:text-primary transition-colors font-medium" href="mailto:tejassainids@gmail.com">Email</a>
+                    <li data-reveal="up" data-reveal-delay="240">
+                        <a href="mailto:tejassainids@gmail.com" class="contact-row group flex items-center justify-between gap-4 rounded-lg border border-outline-variant/60 px-5 py-4 bg-surface-container-lowest/60 hover:border-primary">
+                            <span class="flex items-baseline gap-x-3 flex-wrap">
+                                <span class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors duration-300">Email</span>
+                                <span class="font-mono-ui text-mono-ui text-secondary group-hover:text-on-surface-variant transition-colors duration-300">tejassainids@gmail.com</span>
+                            </span>
+                            <svg class="contact-arrow w-4 h-4 text-secondary group-hover:text-primary transition-colors duration-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -337,9 +547,9 @@
 
             <div class="border-t border-outline-variant/60 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="font-label-caps text-label-caps text-tertiary uppercase tracking-widest text-center sm:text-left">© 2026 TEJAS SAINI</p>
-                <a href="#top" class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors font-mono-ui text-[12px] uppercase tracking-wider font-semibold" aria-label="Back to top">
-                    Back to top
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <a href="#top" class="back-top group inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors font-mono-ui text-[12px] uppercase tracking-wider font-semibold" aria-label="Back to top">
+                    <span>Back to top</span>
+                    <svg class="back-top-arrow w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path stroke-linecap="round" d="M12 19V5M6 11l6-6 6 6" />
                     </svg>
                 </a>
@@ -467,11 +677,40 @@ void main() {
                     revealObserver.unobserve(entry.target);
                 });
             }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-            document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+            document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
         } else {
-            document.querySelectorAll('.reveal').forEach((el) => {
+            document.querySelectorAll('[data-reveal]').forEach((el) => {
                 el.classList.add('active');
             });
+        }
+
+        const motionPref = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (!motionPref.matches && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const parallaxEls = document.querySelectorAll('[data-parallax]');
+            if (parallaxEls.length) {
+                let ticking = false;
+                const applyParallax = () => {
+                    const vh = window.innerHeight;
+                    parallaxEls.forEach((el) => {
+                        const r = el.getBoundingClientRect();
+                        if (r.bottom < 0 || r.top > vh) return;
+                        const depth = parseFloat(el.dataset.parallax) || 8;
+                        const p = (r.top + r.height / 2 - vh / 2) / (vh / 2);
+                        const y = Math.round(depth * -p * 10) / 10;
+                        el.style.translate = '0 ' + y + 'px';
+                    });
+                    ticking = false;
+                };
+                const onParallaxScroll = () => {
+                    if (!ticking) {
+                        requestAnimationFrame(applyParallax);
+                        ticking = true;
+                    }
+                };
+                window.addEventListener('scroll', onParallaxScroll, { passive: true });
+                window.addEventListener('resize', onParallaxScroll, { passive: true });
+                applyParallax();
+            }
         }
 
         const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
