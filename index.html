@@ -5,10 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tejas Saini — Portfolio</title>
     <meta name="description" content="Portfolio of Tejas Saini — data science, machine learning, and AI.">
+    <meta name="author" content="Tejas Saini">
     <meta name="theme-color" content="#faf9f8">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tejas Saini — Portfolio">
+    <meta property="og:description" content="Data science, machine learning, and AI. The portfolio of Tejas Saini — including AutoValue and RentDilli.">
+    <meta property="og:url" content="https://tejassainids.com/">
+    <meta property="og:image" content="https://tejassainids.com/assets/autovalue_demo.png">
+    <meta property="og:image:width" content="2820">
+    <meta property="og:image:height" content="1662">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="assets/ts-mark.svg">
     <link rel="icon" type="image/png" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Tejas Saini",
+        "url": "https://tejassainids.com/",
+        "email": "mailto:tejassainids@gmail.com",
+        "description": "Data science, machine learning, and AI.",
+        "sameAs": [
+            "https://github.com/tejassainids",
+            "https://www.linkedin.com/in/tejas-saini-a981a3211/"
+        ],
+        "knowsAbout": [
+            "Data Science",
+            "Machine Learning",
+            "Deep Learning",
+            "AI Engineering"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AutoValue — Indian Car Resale Price Predictor",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "url": "https://autovalue.tejassainids.com",
+        "codeRepository": "https://github.com/tejassainids/indian-car-resale-price-predictor",
+        "description": "A machine learning project that predicts used-car resale prices from vehicle characteristics, with a focus on data preprocessing, feature selection, model evaluation, and deployment.",
+        "author": {
+            "@type": "Person",
+            "name": "Tejas Saini",
+            "url": "https://github.com/tejassainids"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "RentDilli",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "url": "https://rentdilli.tejassainids.com/",
+        "codeRepository": "https://github.com/tejassainids/RentDilli",
+        "description": "A machine-learning-powered web application that estimates the monthly rental price of residential properties in Delhi based on property characteristics and location information.",
+        "author": {
+            "@type": "Person",
+            "name": "Tejas Saini",
+            "url": "https://github.com/tejassainids"
+        }
+    }
+    </script>
     <script>document.documentElement.classList.add('js')</script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -483,25 +546,27 @@
                 <div class="lg:col-span-7 project-media relative rounded-2xl overflow-hidden bg-surface-container-low border border-outline-variant/50" data-reveal="up">
                     <img src="assets/autovalue_demo.png" alt="AutoValue — Indian Car Resale Price Predictor interface preview" width="2820" height="1662" loading="lazy" data-parallax="10" class="w-full h-auto block">
                     <div class="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
-                    <a href="https://autovalue.tejassainids.com" target="_blank" rel="noopener noreferrer" class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-primary/90 backdrop-blur-sm text-on-primary font-mono-ui text-mono-ui px-3 py-1.5 hover:bg-primary transition-colors" aria-label="Open AutoValue live demo">
-                        <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-[#9fcfb2]" aria-hidden="true"></span>
-                        Live
-                    </a>
                 </div>
 
                 <div class="lg:col-span-5 flex flex-col justify-center mt-8 lg:mt-0 lg:pl-6" data-reveal="right" data-reveal-delay="120">
                     <h3 class="font-headline-lg-mobile text-[28px] md:text-[36px] md:leading-tight text-primary mb-5 leading-tight">
                         AutoValue — Indian Car Resale Price Predictor
                     </h3>
-                    <p class="font-body-md text-body-md text-secondary mb-6 leading-relaxed">
+                    <p class="font-body-md text-body-md text-secondary mb-2 leading-relaxed italic">
+                        Know what your car is really worth.
+                    </p>
+                    <p class="font-body-md text-body-md text-secondary mb-3 leading-relaxed">
                         A machine learning project that predicts used-car resale prices from vehicle characteristics, with a focus on data preprocessing, feature selection, model evaluation, and deployment.
                     </p>
-                    <p class="font-mono-ui text-mono-ui text-on-surface-variant uppercase tracking-wider mb-8">
+                    <p class="font-mono-ui text-mono-ui text-on-surface-variant uppercase tracking-wider mb-2">
                         Python · Pandas · Scikit-learn · FastAPI
+                    </p>
+                    <p class="font-mono-ui text-mono-ui text-primary uppercase tracking-wider mb-8 font-semibold">
+                        R&#178; 0.32 &middot; MAE &#8377;298,758 &middot; Gradient Boosting
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a class="project-cta bg-primary text-on-primary px-8 py-3 rounded hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg shadow-sm font-mono-ui text-mono-ui uppercase tracking-wider text-center" href="https://autovalue.tejassainids.com" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                        <a class="project-cta border border-on-surface text-on-surface px-6 py-3 rounded hover:bg-surface-container-low hover:-translate-y-0.5 transition-all duration-300 font-mono-ui text-mono-ui uppercase tracking-wider" href="https://github.com/tejassainids/AutoValue" target="_blank" rel="noopener noreferrer" aria-label="AutoValue GitHub repository">&lt;Code&gt;</a>
+                        <a class="project-cta border border-on-surface text-on-surface px-6 py-3 rounded hover:bg-surface-container-low hover:-translate-y-0.5 transition-all duration-300 font-mono-ui text-mono-ui uppercase tracking-wider" href="https://github.com/tejassainids/indian-car-resale-price-predictor" target="_blank" rel="noopener noreferrer" aria-label="AutoValue GitHub repository">&lt;Code&gt;</a>
                     </div>
 
                     <details class="group mt-10">
@@ -525,6 +590,70 @@
                             <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
                                 <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Deployment</span>
                                 <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">The model is served through a FastAPI API and reachable from the browser via the live demo.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Results</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">Final model is a tuned Gradient Boosting Regressor with an R&#178; of 0.32, a Mean Absolute Error of &#8377;298,757.94 and a Root Mean Squared Error of &#8377;364,899.35 &mdash; tuned with a learning rate of 0.2, 50 estimators, and a max depth of 3.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </article>
+
+            <article class="project-card group relative grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center mt-24">
+                <span class="hidden lg:block absolute -top-16 left-0 font-display-lg text-[160px] leading-none text-primary/5 tracking-tighter select-none pointer-events-none" aria-hidden="true">02</span>
+
+                <div class="lg:col-span-7 project-media relative rounded-2xl overflow-hidden bg-surface-container-low border border-outline-variant/50" data-reveal="up">
+                    <img src="assets/rentdilli.png" alt="RentDilli — Delhi Rental Price Estimator interface preview" width="2892" height="1634" loading="lazy" class="w-full h-auto block">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col justify-center mt-8 lg:mt-0 lg:pl-6" data-reveal="right" data-reveal-delay="120">
+                    <h3 class="font-headline-lg-mobile text-[28px] md:text-[36px] md:leading-tight text-primary mb-5 leading-tight">
+                        RentDilli
+                    </h3>
+                    <p class="font-body-md text-body-md text-secondary mb-2 leading-relaxed italic">
+                        Know your Delhi rent. List with confidence.
+                    </p>
+                    <p class="font-body-md text-body-md text-secondary mb-6 leading-relaxed">
+                        A machine-learning-powered web application that estimates the monthly rental price of residential properties in Delhi based on property characteristics and location information.
+                    </p>
+                    <p class="font-mono-ui text-mono-ui text-on-surface-variant uppercase tracking-wider mb-2">
+                        Python · Pandas · Scikit-learn · XGBoost · FastAPI · JavaScript
+                    </p>
+                    <p class="font-mono-ui text-mono-ui text-primary uppercase tracking-wider mb-8 font-semibold">
+                        R&#178; 0.74 &middot; MAE &#8377;7,755 &middot; XGBoost
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a class="project-cta bg-primary text-on-primary px-8 py-3 rounded hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg shadow-sm font-mono-ui text-mono-ui uppercase tracking-wider text-center" href="https://rentdilli.tejassainids.com/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                        <a class="project-cta border border-on-surface text-on-surface px-6 py-3 rounded hover:bg-surface-container-low hover:-translate-y-0.5 transition-all duration-300 font-mono-ui text-mono-ui uppercase tracking-wider" href="https://github.com/tejassainids/RentDilli" target="_blank" rel="noopener noreferrer" aria-label="RentDilli GitHub repository">&lt;Code&gt;</a>
+                    </div>
+
+                    <details class="group mt-10">
+                        <summary class="inline-flex items-center gap-2.5 font-mono-ui text-mono-ui text-primary uppercase tracking-widest border-b border-outline-variant/60 pb-1.5 hover:border-primary transition-colors">
+                            <svg class="detail-chevron w-4 h-4 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6" /></svg>
+                            Project Details
+                        </summary>
+                        <div class="mt-5 border-t border-outline-variant/60 pt-5 flex flex-col gap-4">
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Problem</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">Tenants and landlords in Delhi lack a reliable, data-driven way to estimate fair monthly rent, leading to uncertainty and inconsistent pricing across the market.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Data</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">A scraped dataset of residential rental listings across Delhi, cleaned and prepared into model-ready features including property size, location, and amenity information.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Approach</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">A regression pipeline comparing multiple models including XGBoost, with feature engineering and hyperparameter tuning &mdash; then picking the best-performing model on held-out data.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Deployment</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">The trained model is served through a FastAPI backend and consumed by a JavaScript frontend, accessible via the live demo.</p>
+                            </div>
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-x-8 gap-y-3">
+                                <span class="col-span-4 md:col-span-3 font-mono-ui text-mono-ui text-secondary uppercase tracking-widest">Results</span>
+                                <p class="col-span-4 md:col-span-9 font-body-md text-body-md text-on-surface-variant leading-relaxed">Final model is a tuned XGBoost Regressor with an R&#178; of 0.74, a Mean Absolute Error of &#8377;7,755.43 and a Root Mean Squared Error of &#8377;20,827.55 &mdash; tuned with a learning rate of 0.2, 50 estimators, and a max depth of 7.</p>
                             </div>
                         </div>
                     </details>
@@ -587,14 +716,27 @@
             </div>
             <ol class="max-w-3xl flex flex-col mt-10">
                 <li data-reveal="up" data-reveal-delay="0">
-                    <a href="https://github.com/tejassainids/AutoValue" target="_blank" rel="noopener noreferrer" class="log-entry log-link group flex items-start justify-between gap-4 border-t border-outline-variant/70 py-6">
+                    <a href="https://autovalue.tejassainids.com" target="_blank" rel="noopener noreferrer" class="log-entry log-link group flex items-start justify-between gap-4 border-t border-outline-variant/70 py-6">
                         <span>
                             <span class="flex items-baseline gap-x-3 flex-wrap">
                                 <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">01</span>
-                                <span class="font-headline-lg-mobile text-[20px] font-semibold text-primary group-hover:text-primary">AutoValue</span>
+                                <span class="font-headline-lg-mobile text-[20px] font-semibold text-primary group-hover:text-primary">AutoValue <span class="font-mono-ui text-mono-ui text-on-surface-variant font-medium normal-case">&rarr; live demo</span></span>
                             </span>
                             <span class="block font-body-md text-body-md text-secondary mt-1.5">Indian car resale prediction</span>
-                            <span class="block font-mono-ui text-mono-ui text-on-surface-variant mt-3">&rarr; preprocessing, feature selection, evaluation, deployment</span>
+                            <span class="block font-mono-ui text-mono-ui text-on-surface-variant mt-3">&rarr; preprocessing, feature selection, evaluation, deployment &middot; <a href="https://github.com/tejassainids/AutoValue" target="_blank" rel="noopener noreferrer" class="underline decoration-outline-variant transition-colors hover:text-primary hover:decoration-primary">GitHub</a></span>
+                        </span>
+                        <svg class="log-arrow w-4 h-4 text-secondary flex-shrink-0 mt-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
+                    </a>
+                </li>
+                <li data-reveal="up" data-reveal-delay="0">
+                    <a href="https://rentdilli.tejassainids.com/" target="_blank" rel="noopener noreferrer" class="log-entry log-link group flex items-start justify-between gap-4 border-t border-outline-variant/70 py-6">
+                        <span>
+                            <span class="flex items-baseline gap-x-3 flex-wrap">
+                                <span class="font-mono-ui text-mono-ui text-secondary text-[12px]">02</span>
+                                <span class="font-headline-lg-mobile text-[20px] font-semibold text-primary group-hover:text-primary">RentDilli <span class="font-mono-ui text-mono-ui text-on-surface-variant font-medium normal-case">&rarr; live demo</span></span>
+                            </span>
+                            <span class="block font-body-md text-body-md text-secondary mt-1.5">Delhi rental price estimation</span>
+                            <span class="block font-mono-ui text-mono-ui text-on-surface-variant mt-3">&rarr; data scraping, feature engineering, XGBoost, deployment &middot; <a href="https://github.com/tejassainids/RentDilli" target="_blank" rel="noopener noreferrer" class="underline decoration-outline-variant transition-colors hover:text-primary hover:decoration-primary">GitHub</a></span>
                         </span>
                         <svg class="log-arrow w-4 h-4 text-secondary flex-shrink-0 mt-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" /></svg>
                     </a>
@@ -642,14 +784,14 @@
                     <div class="reading-row flex items-baseline gap-x-4 gap-y-1 flex-wrap border-t border-outline-variant/70 py-5">
                         <span class="font-mono-ui text-mono-ui text-secondary text-[12px] w-8 flex-shrink-0">02</span>
                         <span class="font-body-md text-body-md text-on-surface font-semibold">Practical Statistics for Data Scientists</span>
-                        <span class="font-mono-ui text-mono-ui text-secondary"><span class="text-primary/70">[ Stats ]</span></span>
+                        <span class="font-mono-ui text-mono-ui text-secondary text-mono-ui">&mdash; Peter Bruce, Andrew Bruce, Peter Gedeck <span class="text-primary/70">[ Stats ]</span></span>
                     </div>
                 </li>
                 <li data-reveal="up" data-reveal-delay="160">
                     <div class="reading-row flex items-baseline gap-x-4 gap-y-1 flex-wrap border-t border-outline-variant/70 py-5">
                         <span class="font-mono-ui text-mono-ui text-secondary text-[12px] w-8 flex-shrink-0">03</span>
-                        <span class="font-body-md text-body-md text-on-surface font-semibold">Practical Mathematics for Data Science</span>
-                        <span class="font-mono-ui text-mono-ui text-secondary"><span class="text-primary/70">[ Math ]</span></span>
+                        <span class="font-body-md text-body-md text-on-surface font-semibold">Essential Math for Data Science</span>
+                        <span class="font-mono-ui text-mono-ui text-secondary text-mono-ui">&mdash; Thomas Nield <span class="text-primary/70">[ Math ]</span></span>
                     </div>
                 </li>
             </ul>
